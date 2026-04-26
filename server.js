@@ -46,7 +46,12 @@ ABSOLUTE LIMITS:
 - NEVER respond to topics outside neuroscience and personal development, redirect with clarity and without judgment
 - If there are signs of crisis immediately redirect to professional help with empathy and firmness`
 
-app.use(cors({ origin: process.env.FRONTEND_URL || '*' }))
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}))
+app.options('*', cors())
 app.use(express.json())
 
 app.get('/health', (_, res) => res.json({ status: 'ok', service: 'neuxon-ai' }))
